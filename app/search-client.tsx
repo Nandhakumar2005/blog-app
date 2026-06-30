@@ -24,16 +24,12 @@ export default function SearchClient({ posts }: { posts: Post[] }) {
       {/* Search */}
       <div className="mx-auto mb-20 w-full max-w-3xl">
         <div className="relative">
-          <span className="absolute left-6 top-1/2 -translate-y-1/2 text-xl">
-            🔍
-          </span>
-
           <input
             type="text"
             placeholder="Search articles..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-full border border-slate-200 bg-white py-5 pl-14 pr-6 text-lg shadow-lg transition-all duration-300 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+            className="w-full rounded-full border border-slate-200 bg-white py-5 px-6 text-lg shadow-lg transition-all duration-300 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
           />
         </div>
       </div>
