@@ -21,71 +21,88 @@ export default function SearchClient({ posts }: { posts: Post[] }) {
   return (
     <section className="max-w-6xl mx-auto px-6 pb-20">
       
-      {/* SEARCH */}
-      <div className="mb-10">
-        <input
-          type="text"
-          placeholder="Search blogs..."
-          className="w-full p-4 rounded-2xl border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-gray-400 transition"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      {/* Search */}
+      <div className="mx-auto mb-20 w-full max-w-3xl">
+        <div className="relative">
+          <span className="absolute left-6 top-1/2 -translate-y-1/2 text-xl">
+            🔍
+          </span>
+
+          <input
+            type="text"
+            placeholder="Search articles..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full rounded-full border border-slate-200 bg-white py-5 pl-14 pr-6 text-lg shadow-lg transition-all duration-300 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+          />
+        </div>
       </div>
 
-      {/* EMPTY STATE */}
+      {/* Empty */}
       {filtered.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-gray-400 text-lg">
-            No blogs found 😕
-          </p>
-          <p className="text-gray-300 text-sm mt-2">
-            Try searching something else
+        <div className="py-20 text-center">
+          <div className="text-6xl">📚</div>
+
+          <h2 className="mt-6 text-2xl font-bold text-slate-800">
+            No articles found
+          </h2>
+
+          <p className="mt-2 text-slate-500">
+            Try searching with another keyword.
           </p>
         </div>
       )}
 
-      {/* GRID */}
-      <div className="grid gap-8 md:grid-cols-2">
+      {/* Cards */}
+      <div className="grid gap-10 md:grid-cols-2">
         {filtered.map((post) => (
-          <Link key={String(post.id)} href={`/posts/${post.id}`}>
-            
-            <article className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-
-              {/* IMAGE */}
+          <Link key={post.id} href={`/posts/${post.id}`} className="group">
+            <article className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+              
+              {/* Image */}
               {post.image && (
                 <div className="overflow-hidden">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
                   />
                 </div>
               )}
 
-              {/* CONTENT */}
-              <div className="p-6">
-                
-                <h2 className="text-xl font-bold text-gray-900 group-hover:text-black transition">
-                  {post.title}
-                </h2>
-
-                <p className="text-gray-600 mt-3 leading-relaxed">
-                  {post.content.slice(0, 110)}...
-                </p>
-
-                <div className="mt-5 flex items-center justify-between">
-                  <span className="text-xs text-gray-400">
-                    {post.createdAt}
-                  </span>
-
-                  <span className="text-xs text-black font-medium opacity-0 group-hover:opacity-100 transition">
-                    Read more →
+              {/* Content */}
+              <div className="p-7">
+                <div className="mb-4">
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                    {post.createdAt
+                      ? new Date(post.createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
+                      : "Recent"}
                   </span>
                 </div>
 
+                <h2 className="text-2xl font-bold leading-tight text-slate-900 transition-colors group-hover:text-blue-600">
+                  {post.title}
+                </h2>
+
+                <p className="mt-4 line-clamp-3 text-slate-600">
+                  {post.content}
+                </p>
+
+                <div className="mt-8 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-blue-600 transition group-hover:translate-x-1">
+                    Read article →
+                  </span>
+
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-500">
+                    Blog
+                  </span>
+                </div>
               </div>
             </article>
-
           </Link>
         ))}
       </div>
