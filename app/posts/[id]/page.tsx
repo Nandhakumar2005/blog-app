@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { getPost } from "@/lib/api";
+import { notFound } from "next/navigation";
 
 type Post = {
   id: string;
@@ -8,28 +10,18 @@ type Post = {
   createdAt?: string;
 };
 
-async function getPost(id: string): Promise<Post> {
-  const res = await fetch(
-    `https://6a43c3da6dba791499ab59d7.mockapi.io/posts/${id}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch post");
-  }
-
-  return res.json();
-}
-
 export default async function PostPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const post = await getPost(id);
+
+  const post: Post | null = await getPost(id);
+
+  if (!post) {
+    notFound();
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 pb-20">
