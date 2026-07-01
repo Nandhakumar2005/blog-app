@@ -23,39 +23,39 @@ export default async function Home() {
   const posts = await getPosts();
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-100 via-slate-50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-slate-100 via-slate-50 to-white flex items-start justify-center">
 
-      {/* HERO */}
-      <section className="relative overflow-hidden">
+  <div className="w-full max-w-5xl px-6 flex flex-col items-center text-center space-y-20">
 
-        {/* Background decoration */}
-        <div className="absolute inset-0" />
-        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl" />
-        <div className="absolute -top-16 right-0 h-80 w-80 rounded-full bg-indigo-200/20 blur-3xl" />
+    {/* HERO */}
+    <section className="relative overflow-hidden w-full mb-10">
 
-        <div className="relative max-w-4xl mx-auto px-6 pt-28 pb-10 text-center">
+  <div className="absolute inset-0" />
+  <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl" />
+  <div className="absolute -top-16 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-indigo-200/20 blur-3xl" />
 
-          <span className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-medium text-blue-700">
-            🚀 Modern Blog Platform
-          </span>
+  <div className="relative pt-20 pb-6 flex flex-col items-center text-center">
 
-          <h1 className="mt-8 text-5xl md:text-7xl font-black tracking-tight text-slate-900">
-            Discover Stories
-          </h1>
+    <h1 className="text-5xl md:text-7xl font-black tracking-tight text-slate-900">
+      Discover Stories
+    </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl leading-8 text-slate-600">
-            Read insightful articles about web development,
-            programming, modern technologies, and software engineering.
-          </p>
+    <p className="mt-6 max-w-2xl text-lg md:text-xl leading-8 text-slate-600">
+      Read insightful articles about web development,
+      programming, modern technologies, and software engineering.
+    </p>
 
-        </div>
-      </section>
+  </div>
+</section>
 
-      {/* SEARCH SECTION (separate = IMPORTANT FIX) */}
-      <section className="px-6 pb-10">
-        <SearchClient posts={posts} />
-      </section>
+    {/* SEARCH */}
+    <section className="w-full flex justify-center">
+  <div className="w-full max-w-2xl">
+    <SearchClient posts={posts} />
+  </div>
+</section>
 
-    </main>
+  </div>
+</main>
   );
 }
