@@ -10,7 +10,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Modern Blog | Next.js",
   description:
     "Explore articles on web development, programming, and modern technologies.",
@@ -22,9 +22,14 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children}<Footer /></Providers>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${inter.className} min-h-screen bg-slate-50 text-slate-900`}
+      >
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

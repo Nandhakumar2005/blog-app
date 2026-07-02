@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getPost } from "@/lib/api";
+import { getPosts, getPost } from "@/lib/api";
+import Sidebar from "@/app/components/Sidebar";
 import { notFound } from "next/navigation";
 
 type Post = {
@@ -18,61 +19,62 @@ export default async function PostPage({
   const { id } = await params;
 
   const post: Post | null = await getPost(id);
+  const posts: Post[] = await getPosts();
 
-  if (!post) {
-    notFound();
-  }
+  if (!post) return notFound();
 
   return (
-    <main className="min-h-screen bg-slate-50 pb-20">
-      {/* Hero Image */}
+    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300 pb-20">
+      {/* HERO IMAGE */}
       {post.image && (
         <div className="overflow-hidden rounded-b-[40px] shadow-md">
           <img
             src={post.image}
             alt={post.title}
-            className="w-full h-[420px] object-cover"
+            className="h-[420px] w-full object-cover"
           />
         </div>
       )}
 
-      <article className="max-w-4xl mx-auto px-6">
-        {/* Back Button */}
-        <Link
-          href="/"
-          className="inline-flex items-center mt-10 mb-8 text-blue-600 font-medium hover:text-blue-800 transition-colors"
-        >
-          ← Back to Articles
-        </Link>
+      {/* CONTENT + SIDEBAR LAYOUT */}
+      <div className="mx-auto flex max-w-6xl gap-10 px-6 py-10">
+        {/* ARTICLE */}
+        <article className="flex-1">
+          <Link
+            href="/"
+            className="mb-8 inline-flex items-center font-medium text-blue-600 hover:text-blue-400 transition"
+          >
+            ← Back to Articles
+          </Link>
 
-        {/* Date */}
-        <div className="mb-5">
-          <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
-            {post.createdAt
-              ? new Date(post.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-              : "Recent"}
-          </span>
-        </div>
+          <div className="mb-5">
+            <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
+              {post.createdAt
+                ? new Date(post.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : "Recent"}
+            </span>
+          </div>
 
-        {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900">
-          {post.title}
-        </h1>
+          <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white transition-colors">
+            {post.title}
+          </h1>
 
-        {/* Divider */}
-        <div className="w-20 h-1 bg-blue-600 rounded-full mt-8 mb-10"></div>
+          <div className="mt-6 mb-8 h-1 w-20 rounded-full bg-blue-600"></div>
 
-        {/* Content */}
-        <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
-          <p className="text-lg leading-9 text-slate-700 whitespace-pre-line">
-            {post.content}
-          </p>
-        </div>
-      </article>
+          <div className="rounded-3xl bg-white dark:bg-slate-900 p-8 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 transition-colors duration-300">
+            <p className="whitespace-pre-line text-lg leading-9 text-slate-700 dark:text-slate-300">
+              {post.content}
+            </p>
+          </div>
+        </article>
+
+        {/* SIDEBAR */}
+        <Sidebar posts={posts} currentId={post.id} />
+      </div>
     </main>
   );
 }
