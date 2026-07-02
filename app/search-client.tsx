@@ -21,6 +21,7 @@ export default function SearchClient({
 
         {/* NAVBAR */}
         <Navbar posts={posts} onFilter={setFilteredPosts} />
+        <div className="h-10"></div>
 
         {/* BLOG GRID */}
         <section className="mt-8">

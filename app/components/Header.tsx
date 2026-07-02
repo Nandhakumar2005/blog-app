@@ -12,6 +12,7 @@ export default function Header() {
       <div className="mx-auto w-full px-6 text-center lg:px-10 xl:px-14">
         <h1 className="text-5xl font-black tracking-tight text-slate-900 dark:text-white md:text-7xl">
           Discover Stories
+          <div className="h-6"></div>
         </h1>
 
         <p className="mx-auto mt-6 max-w-7xl text-lg leading-8 text-slate-600 dark:text-slate-300 md:text-xl">
