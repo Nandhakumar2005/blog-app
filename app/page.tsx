@@ -12,7 +12,9 @@ export default async function Home() {
       <Header />
 
       {/* BLOG APP */}
-      <SearchClient posts={posts} />
+      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14">
+        <SearchClient posts={posts} />
+      </div>
 
     </main>
   );

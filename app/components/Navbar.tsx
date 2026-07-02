@@ -72,8 +72,8 @@ export default function Navbar({ posts, onFilter }: Props) {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/80">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-
+      <div className="flex w-full items-center justify-between px-6 py-4 lg:px-10 xl:px-14">
+        
         {/* LEFT - TAGS */}
         <div className="flex items-center gap-2">
 

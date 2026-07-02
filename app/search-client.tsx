@@ -14,15 +14,20 @@ export default function SearchClient({
   const [filteredPosts, setFilteredPosts] = useState(posts);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 transition-colors duration-300">
+    <main className="min-h-screen w-full bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
 
-      {/* NAVBAR */}
-      <Navbar posts={posts} onFilter={setFilteredPosts} />
+      {/* Full-width container */}
+      <div className="w-full px-6 lg:px-10 xl:px-14">
 
-      {/* BLOG GRID */}
-      <section className="mt-8 rounded-3xl bg-slate-100 dark:bg-slate-900 transition-colors duration-300 p-8">
-        <BlogGrid posts={filteredPosts} />
-      </section>
+        {/* NAVBAR */}
+        <Navbar posts={posts} onFilter={setFilteredPosts} />
+
+        {/* BLOG GRID */}
+        <section className="mt-8">
+          <BlogGrid posts={filteredPosts} />
+        </section>
+
+      </div>
 
     </main>
   );

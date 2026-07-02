@@ -7,14 +7,21 @@ export type Post = {
   image?: string;
   createdAt?: string;
   category?: string;
-   tags?: string;
+  tags?: string;
 };
 
 export default function BlogCard({ post }: { post: Post }) {
   return (
-    <Link href={`/posts/${post.id}`} className="group block">
-      <article className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-
+    <Link href={`/posts/${post.id}`} className="group block h-full">
+      <article
+        className="
+          h-full overflow-hidden rounded-3xl
+          bg-white dark:bg-slate-800
+          shadow-sm ring-1 ring-slate-200 dark:ring-slate-700
+          transition-all duration-300
+          hover:-translate-y-2 hover:shadow-xl
+        "
+      >
         {/* Image */}
         {post.image && (
           <div className="overflow-hidden">
@@ -31,7 +38,7 @@ export default function BlogCard({ post }: { post: Post }) {
 
           {/* Date */}
           <div className="mb-4">
-            <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+            <span className="rounded-full bg-blue-50 dark:bg-slate-700 px-3 py-1 text-xs font-medium text-blue-700 dark:text-blue-200">
               {post.createdAt
                 ? new Date(post.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -43,12 +50,12 @@ export default function BlogCard({ post }: { post: Post }) {
           </div>
 
           {/* Title */}
-          <h2 className="text-2xl font-bold leading-tight text-slate-900 transition-colors group-hover:text-blue-600">
+          <h2 className="text-2xl font-bold leading-tight text-slate-900 dark:text-white transition-colors group-hover:text-blue-600">
             {post.title}
           </h2>
 
           {/* Description */}
-          <p className="mt-4 line-clamp-3 text-slate-600">
+          <p className="mt-4 line-clamp-3 text-slate-600 dark:text-slate-300">
             {post.content}
           </p>
 
@@ -59,7 +66,7 @@ export default function BlogCard({ post }: { post: Post }) {
               Read article →
             </span>
 
-            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-500">
+            <span className="rounded-full bg-slate-100 dark:bg-slate-700 px-3 py-1 text-xs text-slate-500 dark:text-slate-300">
               {post.category ?? "Web Development"}
             </span>
 
