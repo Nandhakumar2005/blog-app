@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { getPosts, getPost } from "@/lib/api";
-import Sidebar from "@/app/components/Sidebar";
 import { notFound } from "next/navigation";
+
+import Header from "@/app/components/Header";
+import Sidebar from "@/app/components/Sidebar";
+
+import { getPosts, getPost } from "@/lib/api";
 
 type Post = {
   id: string;
@@ -24,31 +27,37 @@ export default async function PostPage({
   if (!post) return notFound();
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300 pb-20">
+    <main className="min-h-screen bg-slate-50 transition-colors duration-300 dark:bg-slate-950">
+
+      {/* HEADER */}
+      <Header />
+
       {/* HERO IMAGE */}
       {post.image && (
-        <div className="overflow-hidden rounded-b-[40px] shadow-md">
+        <div className="overflow-hidden">
           <img
             src={post.image}
             alt={post.title}
-            className="h-[420px] w-full object-cover"
+            className="h-[500px] w-full object-cover"
           />
         </div>
       )}
 
-      {/* CONTENT + SIDEBAR LAYOUT */}
-      <div className="mx-auto flex max-w-6xl gap-10 px-6 py-10">
+      {/* ARTICLE + SIDEBAR */}
+      <div className="mx-auto grid max-w-screen-2xl gap-12 px-6 py-12 lg:grid-cols-[1fr_320px] lg:px-10 xl:px-14">
+
         {/* ARTICLE */}
-        <article className="flex-1">
+        <article>
+
           <Link
             href="/"
-            className="mb-8 inline-flex items-center font-medium text-blue-600 hover:text-blue-400 transition"
+            className="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300"
           >
             ← Back to Articles
           </Link>
 
-          <div className="mb-5">
-            <span className="rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
+          <div className="mt-8">
+            <span className="rounded-full bg-slate-200 px-4 py-2 text-sm font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
               {post.createdAt
                 ? new Date(post.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -59,22 +68,29 @@ export default async function PostPage({
             </span>
           </div>
 
-          <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white transition-colors">
+          <h1 className="mt-6 text-5xl font-black leading-tight text-slate-900 dark:text-white">
             {post.title}
           </h1>
 
-          <div className="mt-6 mb-8 h-1 w-20 rounded-full bg-blue-600"></div>
+          <div className="mt-6 h-1 w-24 rounded-full bg-blue-600"></div>
 
-          <div className="rounded-3xl bg-white dark:bg-slate-900 p-8 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 transition-colors duration-300">
-            <p className="whitespace-pre-line text-lg leading-9 text-slate-700 dark:text-slate-300">
+          <div className="mt-10 rounded-3xl bg-white p-10 shadow-lg ring-1 ring-slate-200 transition-colors duration-300 dark:bg-slate-900 dark:ring-slate-700">
+
+            <p className="whitespace-pre-line text-lg leading-10 text-slate-700 dark:text-slate-300">
               {post.content}
             </p>
+
           </div>
+
         </article>
 
         {/* SIDEBAR */}
-        <Sidebar posts={posts} currentId={post.id} />
+        <aside className="self-start lg:sticky lg:top-28">
+          <Sidebar posts={posts} currentId={post.id} />
+        </aside>
+
       </div>
+
     </main>
   );
 }
