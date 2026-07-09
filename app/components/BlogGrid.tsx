@@ -7,14 +7,14 @@ type Props = {
 export default function BlogGrid({ posts }: Props) {
   if (posts.length === 0) {
     return (
-      <div className="py-24 text-center">
-        <div className="text-6xl">📚</div>
+      <div className="py-32 text-center">
+        <div className="text-7xl">📚</div>
 
-        <h2 className="mt-6 text-3xl font-bold text-slate-800 dark:text-white">
+        <h2 className="mt-8 text-4xl font-bold text-slate-800 dark:text-white">
           No articles found
         </h2>
 
-        <p className="mt-3 text-slate-500 dark:text-slate-400">
+        <p className="mt-4 text-lg text-slate-500 dark:text-slate-400">
           Try searching with another keyword.
         </p>
       </div>
@@ -22,16 +22,17 @@ export default function BlogGrid({ posts }: Props) {
   }
 
   return (
-    <section className="w-full pb-20">
+    <section className="w-full pb-32">
       <div
         className="
           grid
           grid-cols-1
-          gap-8
+          gap-10
           sm:grid-cols-2
           lg:grid-cols-3
           xl:grid-cols-4
-          2xl:grid-cols-4
+          xl:gap-12
+          2xl:gap-14
         "
       >
         {posts.map((post) => (

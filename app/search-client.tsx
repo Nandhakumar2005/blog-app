@@ -14,34 +14,36 @@ export default function SearchClient({
   const [filteredPosts, setFilteredPosts] = useState(posts);
 
   return (
-    <main className="min-h-screen w-full bg-slate-50 transition-colors duration-300 dark:bg-slate-950">
-
-      <div
+    <main className="w-full">
+      <section
         id="latest-articles"
-        className="w-full px-6 py-16 lg:px-10 xl:px-14"
+        className="mx-auto w-full max-w-screen-2xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20 xl:px-16"
       >
-        {/* Section Heading */}
-        <div className="mb-14 text-center">
-          <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white">
+        {/* Heading */}
+        <div className="mx-auto mb-16 max-w-3xl text-center lg:mb-20">
+          <span className="inline-block rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
             Latest Articles
+          </span>
+
+          <h2 className="mt-6 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+            Explore Our Collection
           </h2>
 
-          <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">
-            Browse the latest tutorials, guides and insights on modern web
+          <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-slate-600 sm:text-xl sm:leading-10 dark:text-slate-400">
+            Discover tutorials, practical guides and expert insights on React,
+            Next.js, TypeScript, Artificial Intelligence, APIs and modern web
             development.
           </p>
         </div>
 
-        {/* Navbar */}
-        <Navbar posts={posts} onFilter={setFilteredPosts} />
-
-        {/* Space */}
-        <div className="h-16"></div>
+        {/* Filter/Navbar */}
+        <div className="mb-12 flex justify-center lg:mb-16">
+          <Navbar posts={posts} onFilter={setFilteredPosts} />
+        </div>
 
         {/* Blog Grid */}
         <BlogGrid posts={filteredPosts} />
-      </div>
-
+      </section>
     </main>
   );
 }
