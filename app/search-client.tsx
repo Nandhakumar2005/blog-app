@@ -4,44 +4,36 @@ import { useState } from "react";
 
 import Navbar from "./components/Navbar";
 import BlogGrid from "./components/BlogGrid";
-import { Post } from "./components/BlogCard";
+import type { Post } from "@/types/post";
 
-export default function SearchClient({
-  posts,
-}: {
-  posts: Post[];
-}) {
+export default function SearchClient({ posts }: { posts: Post[] }) {
   const [filteredPosts, setFilteredPosts] = useState(posts);
 
   return (
     <main className="w-full">
       <section
         id="latest-articles"
-        className="mx-auto w-full max-w-screen-2xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20 xl:px-16"
+        className="mx-auto w-full max-w-screen-2xl px-4 py-12 sm:px-6 sm:py-16 lg:px-12 lg:py-20 xl:px-16"
       >
-        {/* Heading */}
-        <div className="mx-auto mb-16 max-w-3xl text-center lg:mb-20">
-          <span className="inline-block rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14 lg:mb-16">
+          <span className="inline-block rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-700 sm:px-4 sm:py-2 sm:text-sm dark:bg-blue-900/40 dark:text-blue-300">
             Latest Articles
           </span>
 
-          <h2 className="mt-6 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+          <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:mt-6 sm:text-4xl lg:text-5xl dark:text-white">
             Explore Our Collection
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-slate-600 sm:text-xl sm:leading-10 dark:text-slate-400">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:mt-6 sm:text-lg sm:leading-8 dark:text-slate-400">
             Discover tutorials, practical guides and expert insights on React,
-            Next.js, TypeScript, Artificial Intelligence, APIs and modern web
-            development.
+            Next.js, TypeScript, AI, APIs and modern web development.
           </p>
         </div>
 
-        {/* Filter/Navbar */}
-        <div className="mb-12 flex justify-center lg:mb-16">
+        <div className="mb-8 sm:mb-10 lg:mb-14">
           <Navbar posts={posts} onFilter={setFilteredPosts} />
         </div>
 
-        {/* Blog Grid */}
         <BlogGrid posts={filteredPosts} />
       </section>
     </main>

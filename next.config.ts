@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
       },
+      {
+        protocol: "https",
+        hostname: "6a43c3da6dba791499ab59d7.mockapi.io",
+      },
     ],
   },
 };

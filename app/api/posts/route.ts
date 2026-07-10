@@ -1,5 +1,10 @@
-import { posts } from "@/data/mock-posts";
+import { getPosts } from "@/lib/api";
 
 export async function GET() {
-  return Response.json(posts);
+  try {
+    const posts = await getPosts();
+    return Response.json(posts);
+  } catch {
+    return Response.json({ error: "Failed to fetch posts" }, { status: 500 });
+  }
 }

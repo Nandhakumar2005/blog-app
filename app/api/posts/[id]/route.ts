@@ -1,15 +1,14 @@
-import { posts } from "@/data/mock-posts";
+import { getPost } from "@/lib/api";
 
 export async function GET(
-  req: Request,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-
-  const post = posts.find((p) => p.id === id);
+  const post = await getPost(id);
 
   if (!post) {
-    return new Response("Not found", { status: 404 });
+    return Response.json({ error: "Not found" }, { status: 404 });
   }
 
   return Response.json(post);
